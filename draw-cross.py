@@ -13,12 +13,12 @@ mamun = turtle.Turtle()
 mamun.color("blue")
 mamun.pensize(4)
 
-##jenna = turtle.Turtle()
-##jenna.color("purple")
-##jenna.pensize(6)
+jenna = turtle.Turtle()
+jenna.color("purple")
+jenna.pensize(6)
 
-draw_c(mamun, 300, 125)
-#draw_cross(jenna, 200)
+draw_cross(mamun, 75)
+draw_cross(jenna, 200)
 
 
 
