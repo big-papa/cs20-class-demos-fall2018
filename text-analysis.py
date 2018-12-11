@@ -10,7 +10,7 @@ def count_letter_frequency(text, letter_to_count):
         if letter in alphabet:
             total_letters = total_letters + 1
             if letter.lower() == letter_to_count:
-                number_of_es += 1
+                number_of_es = number_of_es + 1
                 
     percent_with_char = number_of_es / total_letters * 100
     percent_with_char = round(percent_with_char, 2)
