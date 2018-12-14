@@ -3,10 +3,10 @@ import turtle
 def apply_rules(letter):
     """Apply rules to a single letter and return the result."""
     if letter == "F":
-        return "F-F++F-F"
+        return "FF"
     
-    #elif letter == "B":
-    #    return "AB"
+    elif letter == "X":
+        return "--FXF++FXF++FXF--"
     
     else:
         return letter
@@ -28,13 +28,15 @@ def create_l_system(axiom, number_of_iterations):
     
 
 canvas = turtle.Screen()
+#canvas.tracer(10)
 ashton = turtle.Turtle()
 ashton.penup()
 ashton.goto(-550, -400)
 ashton.pendown()
 ashton.speed(0)
+ashton.pensize(2)
 
-instructions = create_l_system("F", 5)
+instructions = create_l_system("FXF--FF--FF", 6)
 for task in instructions:
     if task == "F":
         ashton.forward(5)
@@ -42,7 +44,9 @@ for task in instructions:
         ashton.backward(5)
     elif task == "+":
         ashton.right(60)
+        ashton.color("red")
     elif task == "-":
         ashton.left(60)
+        ashton.color("blue")
 
 #print(create_l_system("A", 11))
