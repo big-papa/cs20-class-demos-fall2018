@@ -4,13 +4,19 @@ from pygame.locals import *
 
 def flash_button(which_button):
     if which_button == "green":
+        green_sound.play()
         pygame.draw.rect(DISPLAYSURF, BRIGHTGREEN, green_button)
     elif which_button == "red":
+        red_sound.play()
         pygame.draw.rect(DISPLAYSURF, BRIGHTRED, red_button)
     elif which_button == "yellow":
+        yellow_sound.play()
         pygame.draw.rect(DISPLAYSURF, BRIGHTYELLOW, yellow_button)
     elif which_button == "blue":
+        blue_sound.play()
         pygame.draw.rect(DISPLAYSURF, BRIGHTBLUE, blue_button)
+    pygame.display.update()
+    pygame.time.wait(1000)
 
 def display_regular_buttons():
     pygame.draw.rect(DISPLAYSURF, GREEN, green_button)
@@ -58,11 +64,16 @@ pygame.display.set_caption("Simon Says!")
 #pygame.mixer.music.play(-1, 0)
 
 # sound fx
-#bounce_sound = pygame.mixer.Sound("Swish_4.wav")
+green_sound = pygame.mixer.Sound("sfx_sounds_button1.wav")
+red_sound = pygame.mixer.Sound("sfx_sounds_button2.wav")
+yellow_sound = pygame.mixer.Sound("sfx_sounds_button3.wav")
+blue_sound = pygame.mixer.Sound("sfx_sounds_button4.wav")
 
 #game loop
 while True:
     DISPLAYSURF.fill(BLACK)
+    display_regular_buttons()
+    
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
@@ -71,10 +82,7 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
            mouse_x, mouse_y = event.pos
            the_button = which_button_was_pressed(mouse_x, mouse_y)
-           print(the_button)
-            
-    display_regular_buttons()
-    #flash_button("blue")
+           flash_button(the_button)
     
     pygame.display.update()
     fps_clock.tick(FPS)
