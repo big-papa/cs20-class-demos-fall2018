@@ -3,7 +3,7 @@
 #G R
 #Y B
 
-import pygame, sys
+import pygame, sys, time
 from pygame.locals import *
 
 def display_regular_buttons():
@@ -21,6 +21,8 @@ def flash_button(which_button):
         pygame.draw.rect(DISPLAYSURF, YELLOWFLASH, yellow_button)
     elif which_button == "blue":
         pygame.draw.rect(DISPLAYSURF, BLUEFLASH, blue_button)
+    pygame.display.update()
+    pygame.time.wait(2000)
 
 def which_button_was_pressed(x, y):
     if green_button.collidepoint( (x, y) ):
