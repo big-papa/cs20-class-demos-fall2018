@@ -2,20 +2,42 @@ import pygame
 import sys
 from pygame.locals import *
 
+def flash_button(which_button):
+    if which_button == "green":
+        pygame.draw.rect(DISPLAYSURF, BRIGHTGREEN, green_button)
+    elif which_button == "red":
+        pygame.draw.rect(DISPLAYSURF, BRIGHTRED, red_button)
+    elif which_button == "yellow":
+        pygame.draw.rect(DISPLAYSURF, BRIGHTYELLOW, yellow_button)
+    elif which_button == "blue":
+        pygame.draw.rect(DISPLAYSURF, BRIGHTBLUE, blue_button)
+
 def display_regular_buttons():
     pygame.draw.rect(DISPLAYSURF, GREEN, green_button)
     pygame.draw.rect(DISPLAYSURF, RED, red_button)
     pygame.draw.rect(DISPLAYSURF, YELLOW, yellow_button)
     pygame.draw.rect(DISPLAYSURF, BLUE, blue_button)
 
-
+def which_button_was_pressed(x, y):
+    if green_button.collidepoint( (x,y) ):
+        return "green"
+    elif red_button.collidepoint( (x,y) ):
+        return "red"
+    elif yellow_button.collidepoint( (x,y) ):
+        return "yellow"
+    elif blue_button.collidepoint( (x,y) ):
+        return "blue"
 
 #make some colors - RGB
-RED = (255, 0, 0)
+RED = (150, 0, 0)
 BLACK = (0, 0, 0)
-BLUE = (0, 0, 255)
-GREEN = (0, 255, 0)
-YELLOW = (255, 255, 0)
+BLUE = (0, 0, 150)
+GREEN = (0, 150, 0)
+YELLOW = (150, 150, 0)
+BRIGHTRED = (255, 0, 0)
+BRIGHTBLUE = (0, 0, 255)
+BRIGHTGREEN = (0, 255, 0)
+BRIGHTYELLOW = (255, 255, 0)
 
 green_button = pygame.Rect(100, 100, 300, 300)
 red_button = pygame.Rect(500, 100, 300, 300)
@@ -49,8 +71,10 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
            mouse_x, mouse_y = event.pos
            the_button = which_button_was_pressed(mouse_x, mouse_y)
+           print(the_button)
             
     display_regular_buttons()
+    #flash_button("blue")
     
     pygame.display.update()
     fps_clock.tick(FPS)
