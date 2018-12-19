@@ -3,8 +3,12 @@
 #G R
 #Y B
 
-import pygame, sys, time
+import pygame, sys, time, random
 from pygame.locals import *
+
+def pick_random_color():
+    possible_colors = ["green", "red", "yellow", "blue"]
+    return random.choice(possible_colors)
 
 def display_regular_buttons():
     pygame.draw.rect(DISPLAYSURF, GREEN, green_button)
@@ -65,7 +69,7 @@ red_button = pygame.Rect(500, 100, 300, 300)
 yellow_button = pygame.Rect(100, 500, 300, 300)
 blue_button = pygame.Rect(500, 500, 300, 300)
 
-test_sequence = ["green", "blue", "yellow", "red", "blue"]
+sequence = []
 
 #background tunes
 #background_music = pygame.mixer.music.load("Mercury.wav")
@@ -94,7 +98,8 @@ while True:
         
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                for the_color in test_sequence:
+                sequence.append( pick_random_color() )
+                for the_color in sequence:
                     flash_button(the_color)
                 
         
