@@ -2,7 +2,12 @@ import pygame
 import sys
 from pygame.locals import *
 
-def flash_button(which_button):
+def flash_button(which_button, computer_or_human):
+    if computer_or_human == "computer":
+        display_regular_buttons()
+        pygame.display.update()
+        pygame.time.wait(250)
+        
     if which_button == "green":
         green_sound.play()
         pygame.draw.rect(DISPLAYSURF, BRIGHTGREEN, green_button)
@@ -69,6 +74,8 @@ red_sound = pygame.mixer.Sound("sfx_sounds_button2.wav")
 yellow_sound = pygame.mixer.Sound("sfx_sounds_button3.wav")
 blue_sound = pygame.mixer.Sound("sfx_sounds_button4.wav")
 
+sequence = ["green", "red", "red", "red"]
+
 #game loop
 while True:
     DISPLAYSURF.fill(BLACK)
@@ -82,7 +89,12 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
            mouse_x, mouse_y = event.pos
            the_button = which_button_was_pressed(mouse_x, mouse_y)
-           flash_button(the_button)
+           flash_button(the_button, "human")
+        
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                for this_color in sequence:
+                    flash_button(this_color, "computer")
     
     pygame.display.update()
     fps_clock.tick(FPS)
