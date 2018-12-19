@@ -16,8 +16,11 @@ def display_regular_buttons():
     pygame.draw.rect(DISPLAYSURF, YELLOW, yellow_button)
     pygame.draw.rect(DISPLAYSURF, BLUE, blue_button)
 
-def flash_button(which_button):
-    display_regular_buttons()
+def flash_button(which_button, computer_or_human):
+    if computer_or_human == "computer":
+        display_regular_buttons()
+        pygame.display.update()
+        pygame.time.wait(250)
     if which_button == "green":
         green_sound.play()
         pygame.draw.rect(DISPLAYSURF, GREENFLASH, green_button)
@@ -42,6 +45,11 @@ def which_button_was_pressed(x, y):
         return "yellow"
     elif blue_button.collidepoint( (x, y) ):
         return "blue"
+
+def computer_turn():
+    sequence.append( pick_random_color() )
+    for the_color in sequence:
+        flash_button(the_color, "computer")
 
 pygame.init()
 
@@ -70,6 +78,7 @@ yellow_button = pygame.Rect(100, 500, 300, 300)
 blue_button = pygame.Rect(500, 500, 300, 300)
 
 sequence = []
+user_sequence = []
 
 #background tunes
 #background_music = pygame.mixer.music.load("Mercury.wav")
@@ -93,14 +102,19 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = event.pos
             the_button = which_button_was_pressed(mouse_x, mouse_y)
-            flash_button(the_button)
-            #print(the_button)
+            flash_button(the_button, "human")
+            user_sequence.append(the_button)
+            print(user_sequence)
+            
+            # check if user entered the correct sequence
+            if user_sequence == sequence:
+                print("winner winner chicken dinner")
+                user_sequence = []
+                computer_turn()
         
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                sequence.append( pick_random_color() )
-                for the_color in sequence:
-                    flash_button(the_color)
+                computer_turn()
                 
         
     #DISPLAYSURF.blit(the_logo, (dvd_x, dvd_y))
