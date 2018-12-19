@@ -1,6 +1,12 @@
 import pygame
 import sys
+import random
 from pygame.locals import *
+
+def pick_random_color():
+    the_colors = ["green", "red", "yellow", "blue"]
+    pick = random.choice(the_colors)
+    return pick
 
 def flash_button(which_button, computer_or_human):
     if computer_or_human == "computer":
@@ -74,7 +80,7 @@ red_sound = pygame.mixer.Sound("sfx_sounds_button2.wav")
 yellow_sound = pygame.mixer.Sound("sfx_sounds_button3.wav")
 blue_sound = pygame.mixer.Sound("sfx_sounds_button4.wav")
 
-sequence = ["green", "red", "red", "red"]
+sequence = []
 
 #game loop
 while True:
@@ -93,6 +99,7 @@ while True:
         
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
+                sequence.append( pick_random_color() )
                 for this_color in sequence:
                     flash_button(this_color, "computer")
     
