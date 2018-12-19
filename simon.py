@@ -14,12 +14,16 @@ def display_regular_buttons():
 
 def flash_button(which_button):
     if which_button == "green":
+        green_sound.play()
         pygame.draw.rect(DISPLAYSURF, GREENFLASH, green_button)
     elif which_button == "red":
+        red_sound.play()
         pygame.draw.rect(DISPLAYSURF, REDFLASH, red_button)
     elif which_button == "yellow":
+        yellow_sound.play()
         pygame.draw.rect(DISPLAYSURF, YELLOWFLASH, yellow_button)
     elif which_button == "blue":
+        blue_sound.play()
         pygame.draw.rect(DISPLAYSURF, BLUEFLASH, blue_button)
     pygame.display.update()
     pygame.time.wait(1000)
@@ -67,7 +71,10 @@ test_sequence = ["green", "blue", "yellow", "red", "blue"]
 #pygame.mixer.music.play(-1, 0)
 
 #sound effects
-#bounce_sound = pygame.mixer.Sound("swish_2.wav")
+green_sound = pygame.mixer.Sound("sfx_sounds_button5.wav")
+red_sound = pygame.mixer.Sound("sfx_sounds_button6.wav")
+yellow_sound = pygame.mixer.Sound("sfx_sounds_button7.wav")
+blue_sound = pygame.mixer.Sound("sfx_sounds_button9.wav")
 
 while True:
     #DISPLAYSURF.fill((255, 0, 0))
