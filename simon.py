@@ -13,7 +13,6 @@ def display_regular_buttons():
     pygame.draw.rect(DISPLAYSURF, BLUE, blue_button)
 
 def flash_button(which_button):
-    display_regular_buttons()
     if which_button == "green":
         pygame.draw.rect(DISPLAYSURF, GREENFLASH, green_button)
     elif which_button == "red":
@@ -23,7 +22,7 @@ def flash_button(which_button):
     elif which_button == "blue":
         pygame.draw.rect(DISPLAYSURF, BLUEFLASH, blue_button)
     pygame.display.update()
-    pygame.time.wait(2000)
+    pygame.time.wait(1000)
 
 def which_button_was_pressed(x, y):
     if green_button.collidepoint( (x, y) ):
@@ -82,10 +81,10 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = event.pos
             the_button = which_button_was_pressed(mouse_x, mouse_y)
-            #flash_button(the_button)
+            flash_button(the_button)
             #print(the_button)
-            for the_color in test_sequence:
-                flash_button(the_color)
+            #for the_color in test_sequence:
+            #    flash_button(the_color)
             
     #DISPLAYSURF.blit(the_logo, (dvd_x, dvd_y))
     
